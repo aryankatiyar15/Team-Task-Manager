@@ -17,16 +17,35 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.set("trust proxy", 1);
+
 const allowedOrigins = env.clientUrl
   .split(",")
-  .map((origin) => origin.trim())
+  .map((origin) => origin.trim().replace(/\/$/, ""))
   .filter(Boolean);
+
+function isAllowedOrigin(origin) {
+  if (!origin) {
+    return true;
+  }
+
+  if (allowedOrigins.includes(origin.replace(/\/$/, ""))) {
+    return true;
+  }
+
+  try {
+    const { hostname } = new URL(origin);
+    return hostname.endsWith(".up.railway.app") || hostname.endsWith(".railway.app");
+  } catch (_error) {
+    return false;
+  }
+}
 
 app.use(helmet());
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin) || env.nodeEnv === "development") {
+      if (env.nodeEnv === "development" || isAllowedOrigin(origin)) {
         return callback(null, true);
       }
 

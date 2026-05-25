@@ -102,6 +102,7 @@ PORT=5000
 MONGODB_URI=mongodb://127.0.0.1:27017/team_task_manager
 JWT_SECRET=replace-with-a-long-random-secret
 JWT_EXPIRES_IN=7d
+CLIENT_URL=http://localhost:5173
 ```
 
 For Railway, set `NODE_ENV`, `MONGODB_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, and `CLIENT_URL`.
@@ -203,4 +204,3 @@ After `npm run seed`:
 - File attachments
 - Notifications for overdue tasks
 - Admin analytics export
-
