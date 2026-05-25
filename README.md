@@ -104,6 +104,9 @@ JWT_SECRET=replace-with-a-long-random-secret
 JWT_EXPIRES_IN=7d
 ```
 
+For Railway, set `NODE_ENV`, `MONGODB_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, and `CLIENT_URL`.
+Do not manually set `PORT` on Railway because Railway provides the correct runtime port.
+
 ## Local Setup
 
 1. Install dependencies:
@@ -200,5 +203,4 @@ After `npm run seed`:
 - File attachments
 - Notifications for overdue tasks
 - Admin analytics export
-
 
