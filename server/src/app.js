@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
+import fs from "fs";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
@@ -74,12 +75,14 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-if (env.nodeEnv === "production") {
-  const clientDistPath = path.resolve(__dirname, "../../client/dist");
+const clientDistPath = path.resolve(__dirname, "../../client/dist");
+const clientIndexPath = path.join(clientDistPath, "index.html");
+
+if (fs.existsSync(clientIndexPath)) {
   app.use(express.static(clientDistPath));
 
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(clientDistPath, "index.html"));
+    res.sendFile(clientIndexPath);
   });
 }
 
