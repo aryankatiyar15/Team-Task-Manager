@@ -2,6 +2,10 @@
 
 A production-ready college assessment app for managing projects, assigning tasks, and tracking progress with Admin and Member role-based access control.
 
+## Live Deployment
+
+https://team-task-manager-client-production-1e4e.up.railway.app/login
+
 ## Tech Stack
 
 - Frontend: React + Vite
